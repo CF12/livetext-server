@@ -1,13 +1,18 @@
-const express = require('express')
 const path = require('path')
-const app = express()
+const app = require('express')()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
+const fs = require('fs')
+const jsdom = require('jsdom')
+const { JSDOM } = jsdom
 
 const port = 3000
 
+let appHtml = fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html'))
+const window = new JSDOM(appHtml).window
+
 app.get('/', (req, res) => {
-    res.send(path.join(__dirname, '..', 'public', 'index.html'))
+    res.send(appHtml)
 })
 
 http.listen(port, () => {
@@ -15,5 +20,5 @@ http.listen(port, () => {
 })
 
 io.onconnection((socket) => {
-
+    
 })
