@@ -9,14 +9,4 @@
             <p class="text" />
         </div>
     </body>
-
-    <script>
-        document.onload(() => {
-            var socket = new WebSocket(`ws://`)
-
-            socket.onerror = (err) => {
-                if (err) console.error(err)
-            }
-        })
-    </script>
 </html>
